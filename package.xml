@@ -1,19 +1,25 @@
 <?xml version="1.0"?>
 <package format="2">
   <name>donutdevice</name>
-  <version>0.0.0</version>
+  <version>0.0.1</version>
   <description>The donutdevice package</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->
   <!-- <maintainer email="jane.doe@example.com">Jane Doe</maintainer> -->
-  <maintainer email="maarten@todo.todo">maarten</maintainer>
+  <maintainer email="st.maartenk@gmail.com">Maarten Kleijwegt</maintainer>
 
 
   <!-- One license tag required, multiple allowed, one license per tag -->
   <!-- Commonly used license strings: -->
   <!--   BSD, MIT, Boost Software License, GPLv2, GPLv3, LGPLv2.1, LGPLv3 -->
-  <license>TODO</license>
+  <license>
+ * ----------------------------------------------------------------------------
+ * "THE BEER-WARE LICENSE" (Revision 42):
+ * <st.maartenk@gmail.com> wrote this file.  As long as you retain this notice you
+ * can do whatever you want with this stuff. If we meet some day, and you think
+ * this stuff is worth it, you can buy me a beer in return.   Poul-Henning Kamp
+ * --------</license>
 
 
   <!-- Url tags are optional, but multiple are allowed, one per tag -->
