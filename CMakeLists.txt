@@ -11,7 +11,9 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   std_msgs
+  sensor_msgs
   geometry_msgs
+  nav_msgs
   message_generation
 )
 
@@ -51,11 +53,13 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate messages in the 'msg' folder
  add_message_files(
    FILES
-   Donut.msg
+   IntWheels.msg
    Wheels.msg
    Mpu.msg
    Dm.msg
-
+   Steer.msg
+   Intvector3.msg
+   Donut.msg
 )
 
 ## Generate services in the 'srv' folder
@@ -77,6 +81,8 @@ find_package(catkin REQUIRED COMPONENTS
    DEPENDENCIES
    std_msgs
    geometry_msgs
+   sensor_msgs
+   nav_msgs
  )
 
 ################################################
@@ -140,7 +146,7 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/donutdevice_node.cpp)
+ add_executable(donutdevice_node src/donutdevice_node.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -150,10 +156,10 @@ include_directories(
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
-# add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+ add_dependencies(donutdevice_node donutdevice_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
-# target_link_libraries(${PROJECT_NAME}_node
+ target_link_libraries(donutdevice_node ${catkin_LIBRARIES})
 #   ${catkin_LIBRARIES}
 # )
 
