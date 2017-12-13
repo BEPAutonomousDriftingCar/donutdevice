@@ -55,7 +55,7 @@ find_package(catkin REQUIRED COMPONENTS
    Wheels.msg
    Mpu.msg
    Dm.msg
-
+   Intvector3.msg
 )
 
 ## Generate services in the 'srv' folder

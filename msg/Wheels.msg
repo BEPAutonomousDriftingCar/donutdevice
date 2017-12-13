@@ -1,7 +1,7 @@
 #This represents sensor data for half revolutions made
 
 Header header
-int64 fr
-int64 fl
-int64 rl
-int64 rr
+int16 fr
+int16 fl
+int16 rl
+int16 rr
