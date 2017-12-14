@@ -4,6 +4,7 @@
 # generic rigid transformation to a Vector3, tf2 will only apply the
 # rotation). If you want your data to be translatable too, use the
 # geometry_msgs/Point message instead.
+
 int16 x
 int16 y
 int16 z
