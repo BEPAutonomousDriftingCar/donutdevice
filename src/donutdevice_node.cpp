@@ -16,14 +16,14 @@ class Translater
   Translater()
   {
   ROS_INFO("Starting translater node");
-  imu_pub = n.advertise<sensor_msgs::Imu>("/imu/data_raw", 10);
-  mag_pub = n.advertise<sensor_msgs::MagneticField>("/imu/mag", 10);
-  wheels = n.advertise<donutdevice::Wheels>("wheels", 10);
-  steer = n.advertise<donutdevice::Steer>("steer", 10);
-  vo = n.advertise<nav_msgs::Odometry>("vo", 10);
+  imu_pub = n.advertise<sensor_msgs::Imu>("donutdevice/imu/data_raw", 10);
+  mag_pub = n.advertise<sensor_msgs::MagneticField>("donutdevice/imu/mag", 10);
+  wheels = n.advertise<geometry_msgs::QuaternionStamped>("donutdevice/wheels", 10);
+  steer = n.advertise<donutdevice::Steer>("donutdevice/steer", 10);
+  vo = n.advertise<nav_msgs::Odometry>("donutdevice/vo", 10);
 
-  donutsub = n.subscribe("donut", 1, &Translater::donutCallback, this);
-  mocapsub = n.subscribe("DonutDevice/ground_pose", 1, &Translater::mocapCallback, this);
+  donutsub = n.subscribe("donutdevice/donut", 1, &Translater::donutCallback, this);
+  mocapsub = n.subscribe("donutdevice/ground_pose", 1, &Translater::mocapCallback, this);
   }
   void mocapCallback(const geometry_msgs::PoseStamped::ConstPtr& msg)
   {
@@ -56,10 +56,10 @@ class Translater
 
     w_msg.header.seq = msg->wheels.header.seq;
     w_msg.header.stamp = msg->wheels.header.stamp;
-    w_msg.fl = msg->wheels.fl*pi;
-    w_msg.fr = msg->wheels.fr*pi;
-    w_msg.rl = msg->wheels.rl*pi;
-    w_msg.rr = msg->wheels.rr*pi;
+    w_msg.quaternion.x = msg->wheels.fl*pi;
+    w_msg.quaternion.y = msg->wheels.fr*pi;
+    w_msg.quaternion.z = msg->wheels.rl*pi;
+    w_msg.quaternion.w = msg->wheels.rr*pi;
 
 
     imu_msg.header.seq = msg->mpu.header.seq;
@@ -87,7 +87,7 @@ class Translater
   private:
   std::string base_footprint = "DonutDevice/base_link";
 
-  const double pi = 3.14159265359;
+  const double pi = 0.26179938779;
   
   float cov_x =  999;
   float cov_y =  999;
@@ -95,12 +95,12 @@ class Translater
 
   double inttoangle(int intangle){
     double angle;
-    angle = (intangle-511)*(30/512);
+    angle = (intangle-511)*(0.24719101123);
     return angle;
   }
   int inttoload(int intload){
     if(intload >= 1023){
-      intload =- 1023; 
+      intload = intload - 1023; 
     }
     return intload;
   }
@@ -117,7 +117,7 @@ class Translater
   nav_msgs::Odometry odom_msg;
   sensor_msgs::Imu imu_msg;
   sensor_msgs::MagneticField mag_msg;
-  donutdevice::Wheels w_msg;
+  geometry_msgs::QuaternionStamped w_msg;
   donutdevice::Steer s_msg;
   donutdevice::Donut donut_msg;
 
