@@ -58,7 +58,7 @@ private:
   ros::NodeHandle nh;
 
   int linear_, angular_;
-  double l_scale_, a_scale_,r_scale;
+  double l_scale_, a_scale_, r_scale_;
   ros::Publisher vel_pub_;
   ros::Subscriber joy_sub_;
   
@@ -89,7 +89,7 @@ void TeleopDonut::joyCallback(const sensor_msgs::Joy::ConstPtr& joy)
   if (joy->axes[PS3_BUTTON_REAR_RIGHT_1]==0) {
     vel.linear.x = l_scale_*(joy->axes[PS3_AXIS_BUTTON_REAR_RIGHT_2]-joy->axes[PS3_AXIS_BUTTON_REAR_LEFT_2]);
     if(vel.linear.x<=0){
-      vel.linear.x=r_scale*vel.linear.x;
+      vel.linear.x=r_scale_*vel.linear.x;
     }
   }
   else {
