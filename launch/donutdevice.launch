@@ -14,8 +14,8 @@
  <!-- Axes -->
   <param name="axis_linear" value="1" type="int"/>
   <param name="axis_angular" value="2" type="int"/>
-  <param name="scale_linear" value="-20" type="double"/>
-  <param name="scale_angular" value="20" type="double"/>
+  <param name="scale_linear" value="15" type="double"/>
+  <param name="scale_angular" value="22" type="double"/>
   <param name="scale_reverse" value="0.5" type="double"/>
 
   <node pkg="donutdevice" type="donut_teleop_ps3joy" name="teleop"/>
