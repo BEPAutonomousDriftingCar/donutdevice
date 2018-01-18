@@ -86,8 +86,13 @@ TeleopDonut::TeleopDonut():
 void TeleopDonut::joyCallback(const sensor_msgs::Joy::ConstPtr& joy)
 {
   geometry_msgs::Twist vel;
+  if (joy->axes[PS3_BUTTON_REAR_RIGHT_1]==0) {
+    vel.linear.x = l_scale_*(joy->axes[PS3_AXIS_BUTTON_REAR_RIGHT_2]-joy->axes[PS3_AXIS_BUTTON_REAR_LEFT_2]);
+  }
+  else {
+    vel.angular.x=-1;
+  }
   vel.angular.z = a_scale_*joy->axes[PS3_AXIS_STICK_LEFT_LEFTWARDS];
-  vel.linear.x = l_scale_*joy->axes[PS3_AXIS_BUTTON_REAR_RIGHT_2 ];
   vel_pub_.publish(vel);
 }
 
