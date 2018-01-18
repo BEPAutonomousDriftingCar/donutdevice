@@ -58,7 +58,7 @@ private:
   ros::NodeHandle nh;
 
   int linear_, angular_;
-  double l_scale_, a_scale_;
+  double l_scale_, a_scale_,r_scale;
   ros::Publisher vel_pub_;
   ros::Subscriber joy_sub_;
   
@@ -74,7 +74,7 @@ TeleopDonut::TeleopDonut():
   nh.param("axis_angular", angular_, angular_);
   nh.param("scale_angular", a_scale_, a_scale_);
   nh.param("scale_linear", l_scale_, l_scale_);
-
+  nh.param("scale_reverse", r_scale_, r_scale_);
 
   vel_pub_ = nh.advertise<geometry_msgs::Twist>("donutdevice/cmd_vel", 1);
 
@@ -88,6 +88,9 @@ void TeleopDonut::joyCallback(const sensor_msgs::Joy::ConstPtr& joy)
   geometry_msgs::Twist vel;
   if (joy->axes[PS3_BUTTON_REAR_RIGHT_1]==0) {
     vel.linear.x = l_scale_*(joy->axes[PS3_AXIS_BUTTON_REAR_RIGHT_2]-joy->axes[PS3_AXIS_BUTTON_REAR_LEFT_2]);
+    if(vel.linear.x=<0){
+      vel.linear.x=r_scale*vel.linear.x;
+    }
   }
   else {
     vel.angular.x=-1;
