@@ -93,7 +93,7 @@ void TeleopDonut::joyCallback(const sensor_msgs::Joy::ConstPtr& joy)
     }
   }
   else {
-    vel.angular.x=-1;
+    vel.angular.x=-1.5;
   }
   vel.angular.z = a_scale_*joy->axes[PS3_AXIS_STICK_LEFT_LEFTWARDS];
   vel_pub_.publish(vel);
