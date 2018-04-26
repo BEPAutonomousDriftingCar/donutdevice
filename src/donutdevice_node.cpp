@@ -16,14 +16,14 @@ class Translater
   Translater()
   {
   ROS_INFO("Starting translater node");
-  imu_pub = n.advertise<sensor_msgs::Imu>("donutdevice/imu/data_raw", 10);
-  mag_pub = n.advertise<sensor_msgs::MagneticField>("donutdevice/imu/mag", 10);
-  wheels = n.advertise<geometry_msgs::QuaternionStamped>("donutdevice/wheels", 10);
-  steer = n.advertise<donutdevice::Steer>("donutdevice/steer", 10);
-  vo = n.advertise<nav_msgs::Odometry>("donutdevice/vo", 10);
+  imu_pub = n.advertise<sensor_msgs::Imu>("imu/data_raw", 10);
+  mag_pub = n.advertise<sensor_msgs::MagneticField>("imu/mag", 10);
+  wheels = n.advertise<geometry_msgs::QuaternionStamped>("wheels", 10);
+  steer = n.advertise<donutdevice::Steer>("steer", 10);
+  vo = n.advertise<nav_msgs::Odometry>("vo", 10);
 
-  donutsub = n.subscribe("donutdevice/donut", 1, &Translater::donutCallback, this);
-  mocapsub = n.subscribe("donutdevice/ground_pose", 1, &Translater::mocapCallback, this);
+  donutsub = n.subscribe("donut", 1, &Translater::donutCallback, this);
+  mocapsub = n.subscribe("ground_pose", 1, &Translater::mocapCallback, this);
   }
   void mocapCallback(const geometry_msgs::PoseStamped::ConstPtr& msg)
   {
@@ -47,7 +47,7 @@ class Translater
   }
   void donutCallback(const donutdevice::Donut::ConstPtr& msg)
   {
-    
+
     s_msg.header.seq = msg->dynamixel.header.seq;
     s_msg.header.stamp = msg->dynamixel.header.stamp;
     s_msg.angle = inttoangle(msg->dynamixel.angle);
@@ -88,7 +88,7 @@ class Translater
   std::string base_footprint = "DonutDevice/base_link";
 
   const double pi = 0.26179938779;
-  
+
   float cov_x =  999;
   float cov_y =  999;
   float cov_z = 999;
@@ -100,7 +100,7 @@ class Translater
   }
   int inttoload(int intload){
     if(intload >= 1023){
-      intload = intload - 1023; 
+      intload = intload - 1023;
     }
     return intload;
   }
@@ -144,7 +144,7 @@ int main(int argc, char **argv)
    * The first NodeHandle constructed will fully initialize this node, and the last
    * NodeHandle destructed will close down the node.
    */
-  
+
   Translater Translater;
   ros::spin();
   return 0;
