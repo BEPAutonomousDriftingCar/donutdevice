@@ -16,7 +16,7 @@ class Translater
   Translater()
   {
   ROS_INFO("Starting translater node");
-  imu_pub = n.advertise<sensor_msgs::Imu>("imu/data_raw", 10);
+  imu_pub = n.advertise<sensor_msgs::Imu>("imu_data", 10);
   mag_pub = n.advertise<sensor_msgs::MagneticField>("imu/mag", 10);
   wheels = n.advertise<geometry_msgs::QuaternionStamped>("wheels", 10);
   steer = n.advertise<donutdevice::Steer>("steer", 10);
