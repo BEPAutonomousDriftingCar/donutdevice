@@ -23,7 +23,7 @@ class Translater
   vo = n.advertise<nav_msgs::Odometry>("vo", 10);
 
   donutsub = n.subscribe("donut", 1, &Translater::donutCallback, this);
-  mocapsub = n.subscribe("ground_pose", 1, &Translater::mocapCallback, this);
+  mocapsub = n.subscribe("RC_1/pose", 1, &Translater::mocapCallback, this);
   }
   void mocapCallback(const geometry_msgs::PoseStamped::ConstPtr& msg)
   {
