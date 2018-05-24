@@ -162,6 +162,7 @@ include_directories(
 
 ## Specify libraries to link a library or executable target against
  target_link_libraries(donutdevice_node ${catkin_LIBRARIES})
+ target_link_libraries(donutdevice_node2 ${catkin_LIBRARIES})
  target_link_libraries(donut_teleop_ps3joy ${catkin_LIBRARIES})
 #   ${catkin_LIBRARIES}
 # )
