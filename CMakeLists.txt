@@ -149,6 +149,7 @@ include_directories(
  add_executable(donutdevice_node src/donutdevice_node.cpp)
  add_executable(donut_teleop_ps3joy src/donut_teleop_ps3joy.cpp)
  add_executable(donutdevice_node2 src/donutdevicenode2.cpp)
+ add_executable(donutdevice_node2 src/donutdevicenode3.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -163,7 +164,9 @@ include_directories(
 ## Specify libraries to link a library or executable target against
  target_link_libraries(donutdevice_node ${catkin_LIBRARIES})
  target_link_libraries(donutdevice_node2 ${catkin_LIBRARIES})
+ target_link_libraries(donutdevice_node3 ${catkin_LIBRARIES})
  target_link_libraries(donut_teleop_ps3joy ${catkin_LIBRARIES})
+ 
 #   ${catkin_LIBRARIES}
 # )
 
