@@ -19,7 +19,7 @@ class Translater
   imu_pub = n.advertise<sensor_msgs::Imu>("imu/data_raw", 10);
   mag_pub = n.advertise<sensor_msgs::MagneticField>("imu/mag", 10);
   wheels = n.advertise<geometry_msgs::QuaternionStamped>("wheels", 10);
-  steer = n.advertise<donutdevice::Steer>("steer", 10);
+  steer = n.advertise<geometry_msgs::QuaternionStamped>("steer", 10);
   vo = n.advertise<nav_msgs::Odometry>("vo", 10);
 
   donutsub = n.subscribe("donut", 1, &Translater::donutCallback, this);
@@ -50,8 +50,10 @@ class Translater
 
     s_msg.header.seq = msg->dynamixel.header.seq;
     s_msg.header.stamp = msg->dynamixel.header.stamp;
-    s_msg.angle = inttoangle(msg->dynamixel.angle);
-    s_msg.load = inttoload(msg->dynamixel.load);
+    s_msg.quaternion.x = inttoangle(msg->dynamixel.angle);
+    s_msg.quaternion.y = inttoload(msg->dynamixel.load);
+    s_msg.quaternion.z = 0
+    s_msg.quaternion.w = 0
 
 
     w_msg.header.seq = msg->wheels.header.seq;
@@ -118,7 +120,7 @@ class Translater
   sensor_msgs::Imu imu_msg;
   sensor_msgs::MagneticField mag_msg;
   geometry_msgs::QuaternionStamped w_msg;
-  donutdevice::Steer s_msg;
+  geometry_msgs::QuaternionStamped s_msg;
   donutdevice::Donut donut_msg;
 
 
