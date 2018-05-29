@@ -52,8 +52,8 @@ class Translater
     s_msg.header.stamp = msg->dynamixel.header.stamp;
     s_msg.quaternion.x = inttoangle(msg->dynamixel.angle);
     s_msg.quaternion.y = inttoload(msg->dynamixel.load);
-    s_msg.quaternion.z = 0
-    s_msg.quaternion.w = 0
+    s_msg.quaternion.z = 0;
+    s_msg.quaternion.w = 0;
 
 
     w_msg.header.seq = msg->wheels.header.seq;
