@@ -160,7 +160,7 @@ include_directories(
 ## Add cmake target dependencies of the executable
 ## same as for the library above
  add_dependencies(donutdevice_node donutdevice_generate_messages_cpp)
- add_dependencies(donutdevice_node3 donutdevice_generate_messages_cpp) 
+## add_dependencies(donutdevice_node3 donutdevice_generate_messages_cpp) 
 
 ## Specify libraries to link a library or executable target against
  target_link_libraries(donutdevice_node ${catkin_LIBRARIES})
